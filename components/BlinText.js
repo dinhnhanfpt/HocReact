@@ -1,36 +1,36 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-export default class BlinText extends Component {
+class Blin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showText: 10,
-            length: 2
+            showText: true
         };
-        //const time = 1000 //milisecond
-        //setInterval(taskTodo, time);
-
+        var taskTodo = () => {
+            this.setState(previousState => {
+                return {
+                    showText: !previousState.showText
+                }
+            });
+        }
+        const time = 1000 //milisecond
+        setInterval(taskTodo, time);
     }
 
     render() {
-        let textDisplay = '';
-
-        if (this.state.showText > 0) {
-            textDisplay = this.props.inputText + this.state.length;
-        }
-
+        let textDisplay = this.state.showText? this.props.TextInput:'';
+        let Name = this.state.showText? this.props.name:'';
         return (
-            <View>
-                <Text>{textDisplay}</Text>
-                <Text onPress={() => { this.hide() }}>Button</Text>
-            </View>
+            <Text>{textDisplay} {Name}</Text>
         );
     }
-
-    hide() {
-        this.setState({
-            showText: this.state.showText * (-1),
-            length:this.state.length * 10
-        });
+}
+export default class BlinText extends Component {
+    render() {
+        return (
+            <View>
+                <Blin TextInput='TEST' name='Nhanld'></Blin>
+            </View>
+        );
     }
 }
