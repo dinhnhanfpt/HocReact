@@ -9,4 +9,4 @@ import Robot from './components/Robot';
 import MultipleGreeting from './components/MultipleGreeting';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => MultipleGreeting);
+AppRegistry.registerComponent(appName, () => Robot);
