@@ -10,6 +10,7 @@ import Blintext from './components/BlinText';
 import MultipleGreeting from './components/MultipleGreeting';
 import Mystylesheet from './components/myStyleSheet';
 import MyDimentsion from './components/Dimentsion';
+import MyTextInput from './components/MyTextInput';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => MyDimentsion);
+AppRegistry.registerComponent(appName, () => MyTextInput);
