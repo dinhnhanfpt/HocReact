@@ -11,6 +11,7 @@ import MultipleGreeting from './components/MultipleGreeting';
 import Mystylesheet from './components/myStyleSheet';
 import MyDimentsion from './components/Dimentsion';
 import MyTextInput from './components/MyTextInput';
+import MyButton from './components/myButton';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => MyTextInput);
+AppRegistry.registerComponent(appName, () => MyButton);
