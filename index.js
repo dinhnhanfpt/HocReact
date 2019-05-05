@@ -15,7 +15,7 @@ import MyButton from './components/myButton';
 import VerticalScrollView from './components/VerticalScrollView';
 import HorizontalScrollView from './components/HorizontalScrollView';
 import MyViewPager from './components/MyViewPager';
-import MyFlatlist from './components/myFlatList';
+import myFlatList from './components/myFlatList';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => MyFlatlist);
+AppRegistry.registerComponent(appName, () => myFlatList);

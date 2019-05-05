@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, View ,Text} from 'react-native'
 import ListData from '../data/ListData';
 import FlatListItem from '../components/FlatListItem';
 export default class myFlatList extends Component {
@@ -9,9 +9,11 @@ export default class myFlatList extends Component {
                 <FlatList
                     data={ListData}
                     renderItem={({ item, index }) => {
-                        console.log(JSON.stringify(ListData));
-                        <FlatListItem item={item} index={index}></FlatListItem>
-                    }}>
+                        return(
+                            <FlatListItem item={item} index={index}></FlatListItem>
+                        );
+                    }
+                    }>
                 </FlatList>
             </View>
         );
