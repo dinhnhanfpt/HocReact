@@ -25,11 +25,11 @@ export default class FlatListItem extends Component {
                 onPress: () => {
                     Alert.alert(
                         'Alert',
-                        'do you want to delete '+this.state.id+'?',
+                        'do you want to delete '+this.props.index+'?',
                         [
                             { text: 'No', onPress: () => { }, type: 'cancel' },
                             { text: 'YES', onPress: () => { 
-                                    this.deleteItem(this.state.id);
+                                    this.deleteItem(this.props.index);
                                 }, 
                             }
                         ]
@@ -62,7 +62,7 @@ export default class FlatListItem extends Component {
             </Swipeout>
         );
     }
-    deleteItem(keyId){
-        
+    deleteItem(index){
+        this.props.listener(index);
     }
 }
