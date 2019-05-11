@@ -7,8 +7,10 @@ export default class myFlatList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deleteItem: null
+            deleteItem: null,
+            currentLeng:0
         }
+        this.state.currentLeng = ListData.length;
         this.addItem = this.addItem.bind(this);
     }
     render() {
@@ -28,7 +30,7 @@ export default class myFlatList extends Component {
                     }>
                 </FlatList>
                 <AddModal
-                    ref={'addModal'} parentFlatlist={this}
+                    ref={'addModal'} parentFlatlist={this} leng={ListData.length+1} addmodel={this.listenerItem}
                 ></AddModal>
             </View>
         );
@@ -38,6 +40,14 @@ export default class myFlatList extends Component {
         this.setState((priviousState) => {
             return { deleteItem: index };
         });
+    }
+    listenerItem=(item)=>{
+        ListData.push(item);
+        alert(item.key);
+        this.setState((priviousState)=>{
+            return{
+                currentLeng:item.key}
+            });
     }
     addItem(){
         // alert('aa');

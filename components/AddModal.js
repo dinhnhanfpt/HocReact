@@ -3,11 +3,14 @@ import { Dimensions, Text, View, StyleSheet, Button, TextInput, TouchableHighlig
 import Modal from 'react-native-modalbox'
 var screen = Dimensions.get('window');
 export default class AddModal extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            visible:false
+        this.state = {
+            visible: false,
+            name: '',
+            description: ''
         }
+    
     }
     render() {
         return (
@@ -15,7 +18,7 @@ export default class AddModal extends Component {
                 ref='myaddModal'
                 style={{
                     width: screen.width - screen.width / 4,
-                    height: 200,
+                    height: 250,
                     borderRadius: 10
                 }}
                 position='center'
@@ -26,19 +29,33 @@ export default class AddModal extends Component {
                     <Text>This is popup</Text>
                 </View>
                 <View style={{ height: 0.5, backgroundColor: 'gray' }}></View>
-                <TextInput style={mystyle.myTextInput} placeholder={'pls enter your name'}></TextInput>
-                <TouchableHighlight style={mystyle.myButton} underlayColor='#FF6600' 
-                onPress={
-                    ()=>{this.refs.myaddModal.close()}}>
-                    <Text style={mystyle.whiteText}>aaa</Text>
+                <TextInput style={mystyle.myTextInput} placeholder={'pls enter name'} onChangeText={(text) => { this.setState(() => { this.state.name = text }) }}></TextInput>
+                <TextInput style={mystyle.myTextInput} placeholder={'pls enter description'} onChangeText={(text) => { this.setState(() => this.state.description = text) }}></TextInput>
+                <TouchableHighlight style={mystyle.myButton} underlayColor='#FF6600'
+                    onPress={
+                        () => {
+                            if (!this.state.name || !this.state.description) {
+                                alert("name or description is emtry");
+                            }
+                            else {
+                                const ItemModel = {
+                                    key: this.props.leng,
+                                    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUxwwPZTosUnnc1JMfWvkMgwZ3o7a-jSCCJNyqXYT7fvX8yTsY",
+                                    name: this.state.name,
+                                    description: this.state.description
+                                }
+
+                                this.props.addmodel(ItemModel);
+                                this.refs.myaddModal.close();
+                            }
+                        }}>
+                    <Text style={mystyle.whiteText}>Save</Text>
                 </TouchableHighlight>
             </Modal>
 
         );
     }
-
     showPopUp = () => {
-        // alert('aa');
         this.refs.myaddModal.open();
     }
 }
@@ -50,13 +67,13 @@ var mystyle = StyleSheet.create({
         marginRight: 20, marginLeft: 20, borderBottomWidth: 1, borderBottomColor: 'gray', padding: 0, marginTop: 10
     },
     myButton: {
-        marginRight: 40, marginLeft: 40, padding: 10, borderRadius:10,
-        backgroundColor:'red', alignItems:'center', marginTop:60
+        marginRight: 40, marginLeft: 40, padding: 10, borderRadius: 10,
+        backgroundColor: 'red', alignItems: 'center', marginTop: 40
     },
-    whiteText:{
-        color:'white'
+    whiteText: {
+        color: 'white'
     }
-    
+
 
 }
 );
