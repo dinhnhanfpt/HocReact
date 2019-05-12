@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, Image, Alert } from 'react-native'
 import Swipeout from 'react-native-swipeout';
+import EditModal from './EditModal';
 export default class FlatListItem extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            id:''
+        this.state = {
+            id: ''
         }
     }
     render() {
@@ -13,33 +14,42 @@ export default class FlatListItem extends Component {
             autoClose: true,
             onOpen: (selectId, rowId, direction) => {
                 this.setState({
-                        id:this.props.item.key
-                    }
+                    id: this.props.item.key
+                }
                 )
 
             },
             onClose: () => {
-            
+
             },
-            right: [{
-                onPress: () => {
-                    Alert.alert(
-                        'Alert',
-                        'do you want to delete '+this.props.index+'?',
-                        [
-                            { text: 'No', onPress: () => { }, type: 'cancel' },
-                            { text: 'YES', onPress: () => { 
-                                    this.deleteItem(this.props.index);
-                                }, 
-                            }
-                        ]
+            right: [
+                {
+                    onPress: () => {
+                        Alert.alert(
+                            'Alert',
+                            'do you want to delete ' + this.props.index + '?',
+                            [
+                                { text: 'No', onPress: () => { }, type: 'cancel' },
+                                {
+                                    text: 'YES', onPress: () => {
+                                        this.deleteItem(this.props.index);
+                                    },
+                                }
+                            ]
 
-                    )
+                        )
 
 
+                    },
+                    text: 'Delete', type: 'delete'
                 },
-                text: 'Delete', type: 'delete'
-            }],
+                {
+                    onPress: () => {
+                      this.props.listenerEdit();
+                    },
+                    text:"Edit", type:'primary'
+                }
+            ],
             rowId: this.props.index,
             sectionId: 1
         }
@@ -62,7 +72,8 @@ export default class FlatListItem extends Component {
             </Swipeout>
         );
     }
-    deleteItem(index){
+    deleteItem(index) {
         this.props.listener(index);
     }
+
 }

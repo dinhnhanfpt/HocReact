@@ -3,6 +3,7 @@ import { FlatList, View, TouchableHighlight, Image } from 'react-native'
 import ListData from '../data/ListData';
 import FlatListItem from '../components/FlatListItem';
 import AddModal from './AddModal'
+import EditModal from './EditModal'
 export default class myFlatList extends Component {
     constructor(props) {
         super(props);
@@ -12,6 +13,7 @@ export default class myFlatList extends Component {
         }
         this.state.currentLeng = ListData.length;
         this.addItem = this.addItem.bind(this);
+        this.showEdit = this.showEdit.bind(this);
     }
     render() {
         return (
@@ -25,13 +27,13 @@ export default class myFlatList extends Component {
                     data={ListData}
                     extraData={this.state}
                     renderItem={({ item, index }) => {
-                        return (<FlatListItem item={item} index={index} listener={this.getIndex}></FlatListItem>)
+                        return (<FlatListItem item={item} index={index} listener={this.getIndex} listenerEdit={this.showEdit}></FlatListItem>)
                     }
                     }>
                 </FlatList>
                 <AddModal
-                    ref={'addModal'} parentFlatlist={this} leng={ListData.length+1} addmodel={this.listenerItem}
-                ></AddModal>
+                    ref={'addModal'} parentFlatlist={this} leng={ListData.length+1} addmodel={this.listenerItem}></AddModal>
+                <EditModal ref={'editmodal'} parentFlatlist={this}></EditModal>
             </View>
         );
     }
@@ -52,5 +54,8 @@ export default class myFlatList extends Component {
     addItem(){
         // alert('aa');
        this.refs.addModal.showPopUp();
+    }
+    showEdit(){
+        this.refs.editmodal.showEdit();
     }
 }
