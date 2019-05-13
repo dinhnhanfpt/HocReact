@@ -9,7 +9,8 @@ export default class myFlatList extends Component {
         super(props);
         this.state = {
             deleteItem: null,
-            currentLeng:0
+            currentLeng:0,
+            item:''
         }
         this.state.currentLeng = ListData.length;
         this.addItem = this.addItem.bind(this);
@@ -27,13 +28,17 @@ export default class myFlatList extends Component {
                     data={ListData}
                     extraData={this.state}
                     renderItem={({ item, index }) => {
-                        return (<FlatListItem item={item} index={index} listener={this.getIndex} listenerEdit={this.showEdit}></FlatListItem>)
+                
+                        return (
+                        <FlatListItem item={item} index={index} listener={this.getIndex} listenerEdit={this.showEdit}></FlatListItem>
+                        
+                        )
                     }
                     }>
                 </FlatList>
                 <AddModal
                     ref={'addModal'} parentFlatlist={this} leng={ListData.length+1} addmodel={this.listenerItem}></AddModal>
-                <EditModal ref={'editmodal'} parentFlatlist={this}></EditModal>
+                <EditModal ref={'editmodal'} parentFlatlist={this} update={this.updateItem}></EditModal>
             </View>
         );
     }
@@ -55,7 +60,10 @@ export default class myFlatList extends Component {
         // alert('aa');
        this.refs.addModal.showPopUp();
     }
-    showEdit(){
-        this.refs.editmodal.showEdit();
+    showEdit(item){
+        this.refs.editmodal.show(item);
+    }
+    updateItem(item){
+        var foundKey = ListData.findIndex(item=>this.s)
     }
 }

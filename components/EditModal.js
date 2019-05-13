@@ -1,31 +1,48 @@
-import React, {Component} from 'react'
-import {View, Dimensions, StyleSheet} from 'react-native'
+import React, { Component } from 'react'
+import { View, Dimensions, StyleSheet, Text, TextInput, TouchableHighlight } from 'react-native'
 import Modal from 'react-native-modalbox'
-export default class EditModal extends Component{
-    constructor(props){
+export default class EditModal extends Component {
+    constructor(props) {
         super(props);
+        this.state={
+            item:''
+        }
     }
-    render(){
-        return(
+    render() {
+        return (
             <Modal style={myStyle.myModal}
                 ref='myEditModal'
                 backdropPressToClose={false}
                 backdrop={true}
                 swipeToClose={false}
-                position='center'
+                position='center'>
+                <View style={myStyle.header}>
+                    <Text>This is popup</Text>
+                </View>
+                <View style={{ height: 0.5, backgroundColor: 'gray' }}></View>
+                <TextInput style={myStyle.myTextInput} placeholder={'pls enter name'} onChangeText={(text) => { this.setState(() => { this.state.item.name = text }) }}>{this.state.name}</TextInput>
+                <TextInput  style={myStyle.myTextInput} placeholder={'pls enter description'} onChangeText={(text) => { this.setState(() => this.state.item.description = text) }}>{this.state.description}</TextInput>
+                <TouchableHighlight style ={myStyle.myButton} underlayColor='#FF6600' onPress={this.myupdateItem}>
 
-            ></Modal>
+                    <Text style={myStyle.whiteText}>Save</Text>
+                </TouchableHighlight>
+            </Modal>
         );
     }
-    showEdit=()=>{
+    show = (Item) => {
+        this.setState(this.state.item=Item);
         this.refs.myEditModal.open();
+    }
+    myupdateItem=()=>{
+        this.refs.myEditModal.close();
+        this.props.update(this.state.item);
     }
 }
 var widthOfScreen = Dimensions.get('window').width;
-var myStyle = StyleSheet.create({
-        myModal:{
-            width: widthOfScreen-widthOfScreen/4, height:200, borderRadius:10
-        },
+const myStyle = StyleSheet.create({
+    myModal: {
+        width: widthOfScreen - widthOfScreen / 4, height: 200, borderRadius: 10
+    },
         header: {
             height: 40, alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 5
         },
@@ -39,5 +56,5 @@ var myStyle = StyleSheet.create({
         whiteText: {
             color: 'white'
         }
-    }
+}
 );

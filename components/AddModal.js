@@ -59,7 +59,7 @@ export default class AddModal extends Component {
         this.refs.myaddModal.open();
     }
 }
-var mystyle = StyleSheet.create({
+const mystyle = StyleSheet.create({
     header: {
         height: 40, alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 5
     },

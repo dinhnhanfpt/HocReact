@@ -45,7 +45,7 @@ export default class FlatListItem extends Component {
                 },
                 {
                     onPress: () => {
-                      this.props.listenerEdit();
+                      this.props.listenerEdit(this.props.item);
                     },
                     text:"Edit", type:'primary'
                 }
