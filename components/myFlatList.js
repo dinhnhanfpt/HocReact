@@ -28,7 +28,6 @@ export default class myFlatList extends Component {
                     data={ListData}
                     extraData={this.state}
                     renderItem={({ item, index }) => {
-                
                         return (
                         <FlatListItem item={item} index={index} listener={this.getIndex} listenerEdit={this.showEdit}></FlatListItem>
                         
@@ -50,7 +49,6 @@ export default class myFlatList extends Component {
     }
     listenerItem=(item)=>{
         ListData.push(item);
-        alert(item.key);
         this.setState((priviousState)=>{
             return{
                 currentLeng:item.key}
@@ -60,10 +58,20 @@ export default class myFlatList extends Component {
         // alert('aa');
        this.refs.addModal.showPopUp();
     }
-    showEdit(item){
-        this.refs.editmodal.show(item);
+    showEdit(editItem){
+        this.setState(()=>{
+            item = editItem});
+        this.refs.editmodal.show(editItem);
     }
-    updateItem(item){
-        var foundKey = ListData.findIndex(item=>this.s)
+    updateItem(updateItem){
+        var foundKey = ListData.findIndex(item=>this.state.item.key == updateItem.key);
+        // var item = ListData[foundKey];
+        // alert(updateItem.name);
+        var mItem = ListData[updateItem]
+        alert (mItem.name);
+
+        // ListData[this.state.item]= updateItem;
+        // this.setState({deleteItem : item});
+
     }
 }

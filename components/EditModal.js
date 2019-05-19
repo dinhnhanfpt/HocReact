@@ -20,8 +20,8 @@ export default class EditModal extends Component {
                     <Text>This is popup</Text>
                 </View>
                 <View style={{ height: 0.5, backgroundColor: 'gray' }}></View>
-                <TextInput style={myStyle.myTextInput} placeholder={'pls enter name'} onChangeText={(text) => { this.setState(() => { this.state.item.name = text }) }}>{this.state.name}</TextInput>
-                <TextInput  style={myStyle.myTextInput} placeholder={'pls enter description'} onChangeText={(text) => { this.setState(() => this.state.item.description = text) }}>{this.state.description}</TextInput>
+                <TextInput style={myStyle.myTextInput} placeholder={'pls enter name'} onChangeText={(text) => { this.setState((priviousState) => { this.state.item.name = text }) }}>{this.state.item.name}</TextInput>
+                <TextInput  style={myStyle.myTextInput} placeholder={'pls enter description'} onChangeText={(text) => { this.setState((priviousState) => {this.state.item.description = text}) }}>{this.state.item.description}</TextInput>
                 <TouchableHighlight style ={myStyle.myButton} underlayColor='#FF6600' onPress={this.myupdateItem}>
 
                     <Text style={myStyle.whiteText}>Save</Text>
@@ -30,7 +30,10 @@ export default class EditModal extends Component {
         );
     }
     show = (Item) => {
-        this.setState(this.state.item=Item);
+
+        this.setState((privious)=>{
+            return {item : Item};
+        });
         this.refs.myEditModal.open();
     }
     myupdateItem=()=>{
