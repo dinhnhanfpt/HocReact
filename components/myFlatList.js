@@ -10,7 +10,7 @@ export default class myFlatList extends Component {
         this.state = {
             deleteItem: null,
             currentLeng:0,
-            item:''
+            item:null
         }
         this.state.currentLeng = ListData.length;
         this.addItem = this.addItem.bind(this);
@@ -59,18 +59,21 @@ export default class myFlatList extends Component {
        this.refs.addModal.showPopUp();
     }
     showEdit(editItem){
-        this.setState(()=>{
-            item = editItem});
         this.refs.editmodal.show(editItem);
     }
-    updateItem(updateItem){
-        var foundKey = ListData.findIndex(item=>this.state.item.key == updateItem.key);
-        // var item = ListData[foundKey];
-        // alert(updateItem.name);
-        var mItem = ListData[updateItem]
-        alert (mItem.name);
+    updateItem=(updateItem)=>{
+        // alert(updateItem.key);
+        var foundkey = ListData.findIndex(mItem =>mItem.key == updateItem.key);
+        ListData[foundkey].name= updateItem.name;
+        ListData[foundkey].description= updateItem.description;
+        alert(updateItem.description);
+        this.setState({
+            item:updateItem
+        });
+        // var mItem = ListData[updateItem]
+        // alert (mItem.name);
 
-        // ListData[this.state.item]= updateItem;
+        
         // this.setState({deleteItem : item});
 
     }
